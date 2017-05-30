@@ -7,8 +7,7 @@ def graph_coloring(G):
     color = {}
     pq = HeapPriorityQueue()
     for v in G.vertices():
-        degv = G.degree(v) + G.degree(v,False) if G.is_directed() else G.degree(v)
-        #degv = G.degree(v)
+        degv = G.degree(v)
         pq.add(degv, v)                         #Riordino i vertici per grado crescente
 
     ku = set()
@@ -19,8 +18,6 @@ def graph_coloring(G):
         for v in color:                         #è adiacente ad uno di quelli già nella soluzione. Se
             if G.get_edge(u, v):                #questo è vero, tolgo dal set dei possibili colori che posso assegnare
                 used.add(color[v])              #a quel vertice il colore assegnato al vertice adicente
-            if G.is_directed() and G.get_edge(v,u):
-                used.add(color[v])
         unused = ku.difference(used)
         if unused:
             color[u] = unused.pop()
