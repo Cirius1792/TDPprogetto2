@@ -1,14 +1,14 @@
 from TdP_collections.graphs.graph import Graph
 from TdP_collections.priority_queue.heap_priority_queue import HeapPriorityQueue
-
+from ReverseHeap import ReverseHeapPriorityQueue
 
 def graph_coloring(G):
 
     color = {}
-    pq = HeapPriorityQueue()
+    pq = ReverseHeapPriorityQueue()
     for v in G.vertices():
         degv = G.degree(v)
-        pq.add(degv, v)                         #Riordino i vertici per grado crescente
+        pq.add(degv, v)                         #Riordino i vertici per grado decrescente
 
     ku = set()
     k = 0
