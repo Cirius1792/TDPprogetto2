@@ -105,7 +105,6 @@ def max_degree(G):
     return max_deg
 ##################################################################################################################
 
-
 if __name__ == '__main__':
     g = load_graph(open('grafo2.txt'), False)
     color= graph_coloring(g)
