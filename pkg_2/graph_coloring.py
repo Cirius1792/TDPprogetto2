@@ -103,6 +103,7 @@ def max_degree(G):
         degv = G.degree(v) if not dir else G.degree(v) + G.degree(v, False)
         max_deg = max(max_deg, degv)
     return max_deg
+##################################################################################################################
 
 
 if __name__ == '__main__':
