@@ -1,5 +1,4 @@
-from TdP_collections.graphs.graph import Graph
-from TdP_collections.priority_queue.heap_priority_queue import HeapPriorityQueue
+
 from ReverseHeap import ReverseHeapPriorityQueue
 from pkg_1.AdjListGraph import AdjListGraph
 
@@ -11,11 +10,11 @@ def graph_coloring(G):
     pq = ReverseHeapPriorityQueue()
     for v in G.vertices():
         degv = G.degree(v)
-        pq.add(degv, v)                             #Riordino i vertici per grado decrescente
+        pq.add(degv, v)                                 #Riordino i vertici per grado decrescente
 
     ku = set()
-    k = 0                                           #k tiene traccia del numero di colori usati, è una variabile di comodo
-                                                    #usata per non dover richiamare ogni volta len() su ku
+    k = 0                                               #k tiene traccia del numero di colori usati, è una variabile di comodo
+                                                        #usata per non dover richiamare ogni volta len() su ku
     while not pq.is_empty():
         deg, u = pq.remove_min()
         used = set()                                    #ad ogni iterazione controllo se il vertice corrente
@@ -54,7 +53,7 @@ def print_coloring(colors, g):
     print("\n\n")
     print("Colori Utilizzati: \t",n_color)
 
-###### Funzione di Test ################################################################################
+###### Funzioni di Test ################################################################################
 def check_colors(G, color):
     """Ricevuti in ingresso un grafo ed una sua colorazione, controlla che non ci siano vertici adiacenti dello stesso
         colore"""
@@ -96,15 +95,14 @@ def load_graph(file, directed=False):
     return g
 
 def max_degree(G):
-    max_deg_out = 0
-    max_deg_in = 0
+    """Dato un grafo in ingresso G, restituisce il massimo grado dei suoi vertici. Nel caso di grafi diretti,
+    si considera la somma del grado entrante e di quello uscente"""
+    max_deg = 0
+    dir = G.is_directed()
     for v in G.vertices():
-        degv = G.degree(v)
-        max_deg_out = max(max_deg_out, degv)
-        if G.is_directed():
-            degv = G.degree(v, False)
-            max_deg_in = max(max_deg_in, degv)
-    return max(max_deg_in,max_deg_out)
+        degv = G.degree(v) if not dir else G.degree(v) + G.degree(v, False)
+        max_deg = max(max_deg, degv)
+    return max_deg
 
 
 if __name__ == '__main__':
