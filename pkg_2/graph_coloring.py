@@ -54,7 +54,7 @@ def print_coloring(colors, g):
     print("Colori Utilizzati: \t",n_color)
 
 ###### Funzioni di Test ################################################################################
-def check_colors(G, color):
+def check_colors_2(G, color):
     """Ricevuti in ingresso un grafo ed una sua colorazione, controlla che non ci siano vertici adiacenti dello stesso
         colore"""
     for u in G.vertices():
@@ -63,6 +63,15 @@ def check_colors(G, color):
             if color[u] == color[v]:
                 print(u,'\t',v)
                 return False
+    return True
+
+def check_colors(G, color):
+    """Ricevuti in ingresso un grafo ed una sua colorazione, controlla che non ci siano vertici adiacenti dello stesso
+        colore"""
+    for e in G.edges():
+        u, v = e.endpoints();
+        if color[u] == color[v]:
+            return False
     return True
 
 
