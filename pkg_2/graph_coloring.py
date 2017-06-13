@@ -1,16 +1,14 @@
 from .ReverseHeap import ReverseHeapPriorityQueue
 
 
-def graph_coloring_1(G):
+def graph_coloring(G):
     """Preso in input un grafo G, restituisce un dizionario colors contenente una K-colorazione di G, utilizzando al
         più D+1 colori, dove D è il grado massimo dei vertici di G"""
-    op = 0
     color = {}
     pq = ReverseHeapPriorityQueue()
     for v in G.vertices():
         degv = G.degree(v)
         pq.add(degv, v)  # Riordino i vertici per grado decrescente
-        op +=1
 
     ku = set()
     k = 0                                       # k tiene traccia del numero di colori usati, è una variabile di comodo
@@ -23,7 +21,6 @@ def graph_coloring_1(G):
                 used.add(color[v])              # a quel vertice il colore assegnato al vertice adicente
             elif G.is_directed() and G.get_edge(v, u):         # Nel caso in cui il grafo fosse diretto, devo controllare anche la
                 used.add(color[v])  # connessione inversa fra i due vertici in esame
-                op += 1
         unused = ku.difference(used)
         if unused:
             color[u] = unused.pop()  # se ci sono colori non utilizzati, ne assegno uno qualsiasi al vertice
@@ -31,48 +28,9 @@ def graph_coloring_1(G):
             k += 1
             ku.add(k)
             color[u] = k
-            op +=1
+            
     return color
 
-def graph_coloring(G):
-    """Preso in input un grafo G, restituisce un dizionario colors contenente una K-colorazione di G, utilizzando al
-        più D+1 colori, dove D è il grado massimo dei vertici di G"""
-    op = 0
-    color = {}
-    pq = ReverseHeapPriorityQueue()
-    for v in G.vertices():
-        degv = G.degree(v)
-        pq.add(degv, v)  # Riordino i vertici per grado decrescente
-        op +=1
-
-    ku = set()
-    k = 0                                       # k tiene traccia del numero di colori usati, è una variabile di comodo
-                                                 # usata per non dover richiamare ogni volta len() su ku
-    while not pq.is_empty():
-        deg, u = pq.remove_min()
-        used = set()
-        for e in G.incident_edges(u):
-            v = e.opposite(u)
-            if v in color:
-                used.add(color[v])
-            op +=1
-        if G.is_directed():
-            for e in G.incident_edges(u, False):
-                v = e.opposite(u)
-                if v in color:
-                    used.add(color[v])
-                op +=1
-
-        unused = ku.difference(used)
-        if unused:
-            color[u] = unused.pop()  # se ci sono colori non utilizzati, ne assegno uno qualsiasi al vertice
-        else:  # se l'insieme dei colori non utilizzati è vuoto, ne uso uno nuovo
-            k += 1
-            ku.add(k)
-            color[u] = k
-        op +=1
-
-    return color
 
 
 def print_coloring(colors, g):
