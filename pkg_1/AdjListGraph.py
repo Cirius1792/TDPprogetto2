@@ -94,8 +94,9 @@ class AdjListGraph:
         return len(self._aux_list)
 
     def edges(self):
-        """Return a list of all edges of the graph."""
-        return self._aux_list
+        """Return an iteration of all edges of the graph."""
+        for e in self._aux_list:
+            yield e
 
     def get_edge(self, u, v):
         """Return the edge from u to v, or None if not adjacent."""
@@ -147,6 +148,8 @@ class AdjListGraph:
         self._aux_list.append(e)
 
     def find_vertex(self, v):
+        """Find and return a vertex by label.
+        Return None if vertex is not found."""
         for vertex in self.vertices():
             if vertex.element() == v:
                 return vertex
@@ -154,9 +157,12 @@ class AdjListGraph:
 
 
 def load_graph(path, directed=False):
-    """Legge da file un grafo rappresentato dalla lista dei suoi archi.
-
-    Restituisce un oggetto della classe Graph
+    """Load a graph from a file, in witch each row is formatted as 'S D W' where:
+    - S is the source vertex
+    - D is the destination vertex
+    - W is the weight of the edge (is set to 1 if not present)
+    
+    Return an AdjListGraph object.
     """
     in_file = open(path)
 
