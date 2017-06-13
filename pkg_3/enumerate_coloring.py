@@ -2,6 +2,7 @@ from pkg_1.AdjListGraph import *
 
 
 def enumerate_coloring(g: AdjListGraph, k):
+    """Dato in input un	AdjListGraph ed	un intero k, restituisce tutte le k-colorazioni	del	grafo."""
     vert = list(g.vertices())
     l_col = []
     d = {}
@@ -10,6 +11,7 @@ def enumerate_coloring(g: AdjListGraph, k):
 
 
 def _backtrack_coloring(g, vert, ind, d, k, l_col):
+    """Funzione di backtracking ausiliaria per il calcolo delle k_colorazioni"""
     if ind == len(vert):
         l_col.append(d)
         return
@@ -25,7 +27,7 @@ def _backtrack_coloring(g, vert, ind, d, k, l_col):
             s.add(d[elem])
     if len(s) == k:
         return
-    for i in range(k):
+    for i in range(1, k + 1):
         if i not in s:
             c = d.copy()
             c[vert[ind]] = i
@@ -33,6 +35,7 @@ def _backtrack_coloring(g, vert, ind, d, k, l_col):
 
 
 def min_colors(g):
+    "Dato in input un	AdjListGraph g, calcola	il	minor numero di	colori	necessari per colorare il grafo."
     k = 1
     while True:
         if enumerate_coloring(g, k):
@@ -40,17 +43,18 @@ def min_colors(g):
         k += 1
 
 
-
-
-g = load_graph('../7.3.txt', True)
-
-
-l = enumerate_coloring(g, 3)
-print(len(l))
-print()
-for d in l:
-    print('-----Dizionario------')
-    for elem in d:
-        print(elem, d[elem])
-
-print('\nColore minimo = ', min_colors(g))
+def print_coloring_list(g, l):
+    print(' ' * 20 + '+' + ('-' * 7 + '+') * g.vertex_count())
+    print('\t\t\t\t\t|', end='')
+    for v in g.vertices():
+        print('{:^7}'.format(str(v)) + '|', end='')
+    print()
+    print('+' + '-' * 19 + '+' + ('-' * 7 + '+') * g.vertex_count())
+    count = 1
+    for col in l:
+        print('| Colorazione', count, '\t|', end='')
+        for v in col:
+            print('{:^7}'.format(str(col[v])) + '|', end='')
+        print()
+        count += 1
+        print('+' + '-' * 19 + '+' + ('-' * 7 + '+') * g.vertex_count())
