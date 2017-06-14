@@ -28,7 +28,7 @@ if __name__ == '__main__':
     print('------------------ Gruppo #10 - Test ---------------------------')
     print("----------------------------------------------------------------")
 
-    g = load_graph("C:\\Users\\Ciro Lucio\\PycharmProjects\\TDPprogetto2\\4-3-graph.txt", True)
+    g = load_graph("C:\\Users\\Ciro Lucio\\PycharmProjects\\TDPprogetto2\\7.3.txt", True)
 
     print('\nNumero di vertici nel grafo: ', g.vertex_count())
     print('Numero di archi nel grafo: ', g.edge_count())
@@ -52,4 +52,4 @@ if __name__ == '__main__':
     else:
         print('Non è possibile colorare il grafo con', k, 'colori!')
 
-    #print('\nIl minor numero di colori necessari per colorare il grafo è:', min_colors(g))
+    print('\nIl minor numero di colori necessari per colorare il grafo è:', min_colors(g))
