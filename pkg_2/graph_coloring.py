@@ -8,7 +8,7 @@ def graph_coloring(G):
     pq = ReverseHeapPriorityQueue()
     for v in G.vertices():
         degv = G.degree(v)
-        pq.add(degv, v)  # Riordino i vertici per grado decrescente
+        pq.add(degv, v)                         # Riordino i vertici per grado decrescente
 
     ku = set()
     k = 0                                       # k tiene traccia del numero di colori usati, è una variabile di comodo

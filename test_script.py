@@ -28,7 +28,7 @@ if __name__ == '__main__':
     print('------------------ Gruppo #10 - Test ---------------------------')
     print("----------------------------------------------------------------")
 
-    g = load_graph("C:\\Users\\CiroLucio\\PycharmProjects\\progetto2\\grafo1.txt", True)
+    g = load_graph("C:\\Users\\Ciro Lucio\\PycharmProjects\\TDPprogetto2\\4-3-graph.txt", True)
 
     print('\nNumero di vertici nel grafo: ', g.vertex_count())
     print('Numero di archi nel grafo: ', g.edge_count())
